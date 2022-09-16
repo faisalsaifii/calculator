@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, View, Switch } from 'react-native';
+import { ThemeContext } from './context/ThemeContext'; // Allows global declaration of theme
+import { myColors } from './styles/Colors';
+import MyKeyboard from './components/MyKeyboard';
 
 export default function App() {
+  const [theme, setTheme] = useState('light');
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <ThemeContext.Provider value={theme}> 
+      <View style={theme === 'light' ? styles.containerlight : styles.containerdark}>
+      <Switch
+        value={theme === 'dark'} // Switch on / true for whichever value is passed
+        onValueChange={() => setTheme(theme === 'light'? 'dark' : 'light')}
+      />
+      <MyKeyboard/>
     </View>
+    </ThemeContext.Provider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerlight: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: myColors.light,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
+  },
+  containerdark: {
+    flex: 1,
+    backgroundColor: myColors.dark,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
