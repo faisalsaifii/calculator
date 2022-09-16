@@ -9,12 +9,12 @@ export default function App() {
   return (
     <ThemeContext.Provider value={theme}> 
       <SafeAreaView style={theme === 'light' ? styles.containerlight : styles.containerdark}>
-      <Switch
-        value={theme === 'dark'} // Switch on / true for whichever value is passed
-        onValueChange={() => setTheme(theme === 'light'? 'dark' : 'light')}
-      />
-      <MyKeyboard/>
-    </SafeAreaView>
+        <Switch
+          value={theme === 'dark'} // Switch on / true for whichever value is passed
+          onValueChange={() => setTheme(theme === 'light'? 'dark' : 'light')}
+        />
+        <MyKeyboard/>
+      </SafeAreaView>
     </ThemeContext.Provider>
   );
 }
