@@ -9,6 +9,7 @@ interface ButtonProps {
     title: string;
     isBlue?: boolean;
     isGray?: boolean;
+    btnWidth?: string;
 }
 
 export default function Button({title, onPress, isBlue, isGray}: ButtonProps) {
@@ -16,7 +17,9 @@ export default function Button({title, onPress, isBlue, isGray}: ButtonProps) {
     return(
         <TouchableOpacity
             style={
-                isBlue ?
+                title === "0" && theme === "light"?
+                Styles.btnZeroLight : title === "0" && theme === "dark"?
+                Styles.btnZeroDark : isBlue ?
                 Styles.btnBlue : isGray ?
                 Styles.btnGray : theme === "light" ?
                 Styles.btnLight : Styles.btnDark

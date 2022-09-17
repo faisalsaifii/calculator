@@ -35,20 +35,24 @@ const myKeyboard = () => {
     switch(operation){
       case '+':
         clear();
-        setResult(parseInt(firstNumber) + parseInt(secondNumber));
+        setResult(parseFloat(firstNumber) + parseFloat(secondNumber));
         break;
       case '-':
         clear();
-        setResult(parseInt(firstNumber) - parseInt(secondNumber));
+        setResult(parseFloat(firstNumber) - parseFloat(secondNumber));
         break;
       case '*':
         clear();
-        setResult(parseInt(firstNumber) * parseInt(secondNumber));
+        setResult(parseFloat(firstNumber) * parseFloat(secondNumber));
         break;
       case '/':
         clear();
-        setResult(parseInt(firstNumber) / parseInt(secondNumber));
+        setResult(parseFloat(firstNumber) / parseFloat(secondNumber));
         break;
+      case '%':
+        clear();
+        if (parseFloat(secondNumber) != 0)
+          setResult((parseFloat(firstNumber) / 100) * parseFloat(secondNumber))
       default:
         clear();
         setResult(0);
@@ -98,6 +102,7 @@ const myKeyboard = () => {
           width: '90%',
           justifyContent: 'flex-end',
           alignSelf: 'center',
+          marginBottom: 10
         }}
       >
         <Text style={Styles.screenSecondNumber}>
@@ -107,13 +112,12 @@ const myKeyboard = () => {
             fontSize: 50,
             fontWeight: '500',
           }}>
-            {operation}
           </Text>
         </Text>
         {firstNumberDisplay()}
       </View>
       <View style={Styles.row}>
-        <Button title='C' isGray onPress={clear} />
+        <Button title='C' isGray onPress={clear} btnWidth='83'/>
         <Button title='+/-' isGray onPress={() => handleOperationPress("+/-")} />
         <Button title='%' isGray onPress={() => handleOperationPress("%")} />
         <Button title='÷' isBlue onPress={() => handleOperationPress("/")} />
@@ -137,9 +141,8 @@ const myKeyboard = () => {
         <Button title='+' isBlue onPress={() => handleOperationPress("+")} />
       </View>
       <View style={Styles.row}>
-        <Button title='.' onPress={() => handleNumberPress('.')} />
         <Button title='0' onPress={() => handleNumberPress('0')} />
-        <Button title='DEL' onPress={() => setFirstNumber(firstNumber.slice(0,-1))} />
+        <Button title='.' onPress={() => handleNumberPress('.')} />
         <Button title='=' isBlue onPress={() => getResult()} />
       </View>
     </View>
