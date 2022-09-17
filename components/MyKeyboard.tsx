@@ -4,8 +4,11 @@ import Button from './Button'
 import { Styles } from '../styles/GlobalStyles'
 import { myColors } from '../styles/Colors'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import { useContext } from 'react'
+import { ThemeContext } from '../context/ThemeContext'
 
 const myKeyboard = () => {
+  const theme = useContext(ThemeContext);
 
   const [firstNumber, setFirstNumber] = React.useState('');
   const [secondNumber, setSecondNumber] = React.useState('');
@@ -32,27 +35,33 @@ const myKeyboard = () => {
   };
 
   const getResult = () => {
+    var fn = parseFloat(firstNumber);
+    var sn = parseFloat(secondNumber);
     switch(operation){
       case '+':
         clear();
-        setResult(parseFloat(firstNumber) + parseFloat(secondNumber));
+        setResult(sn + fn);
         break;
       case '-':
         clear();
-        setResult(parseFloat(firstNumber) - parseFloat(secondNumber));
+        setResult(sn - fn);
         break;
       case '*':
         clear();
-        setResult(parseFloat(firstNumber) * parseFloat(secondNumber));
+        setResult(sn * fn);
         break;
       case '/':
         clear();
-        setResult(parseFloat(firstNumber) / parseFloat(secondNumber));
+        setResult(sn / fn);
         break;
       case '%':
         clear();
-        if (parseFloat(secondNumber) != 0)
-          setResult((parseFloat(firstNumber) / 100) * parseFloat(secondNumber))
+        setResult(sn / 100);
+      case '+/-':
+        clear();
+        if (fn > 0){
+          fn = parseFloat('-'+firstNumber);
+        }
       default:
         clear();
         setResult(0);
@@ -61,32 +70,63 @@ const myKeyboard = () => {
   };
 
   const firstNumberDisplay = () => {
-    if(result !== null){
-      return <Text style={result<99999 ? [Styles.screenFirstNumber, {color: myColors.result}] : [Styles.screenFirstNumber, {fontSize: 50,color: myColors.result}]}>{result?.toString()}</Text>;
-    }
-
-    if( firstNumber && firstNumber.length < 6){
-      return <Text style={Styles.screenFirstNumber}>{firstNumber}</Text>;
-    }
-
-    if (firstNumber === "") {
-      return <Text style={Styles.screenFirstNumber}>{"0"}</Text>;
-    }
-    
-    if (firstNumber.length > 5 && firstNumber.length < 8) {
-      return (
-        <Text style={[Styles.screenFirstNumber, { fontSize: 70 }]}>
+    if (theme === "light"){
+      if(result !== null){
+        return <Text style={result<99999 ? [Styles.screenFirstNumberLight, {color: myColors.result}] : [Styles.screenFirstNumberLight, {fontSize: 50,color: myColors.result}]}>{result?.toString()}</Text>;
+      }
+  
+      if( firstNumber && firstNumber.length < 6){
+        return <Text style={Styles.screenFirstNumberLight}>{firstNumber}</Text>;
+      }
+  
+      if (firstNumber === "") {
+        return <Text style={Styles.screenFirstNumberLight}>{"0"}</Text>;
+      }
+      
+      if (firstNumber.length > 5 && firstNumber.length < 8) {
+        return (
+          <Text style={[Styles.screenFirstNumberLight, { fontSize: 70 }]}>
+            {firstNumber}
+          </Text>
+        );
+      }
+  
+      if (firstNumber. length > 7) {
+        return (
+          <Text style={[Styles.screenFirstNumberLight, { fontSize: 50 }]}>
           {firstNumber}
-        </Text>
-      );
+          </Text>
+        );
+      }
     }
-
-    if (firstNumber. length > 7) {
-      return (
-        <Text style={[Styles.screenFirstNumber, { fontSize: 50 }]}>
-        {firstNumber}
-        </Text>
-      );
+    else{
+      if(result !== null){
+        return <Text style={result<99999 ? [Styles.screenFirstNumberDark, {color: myColors.result}] : [Styles.screenFirstNumberDark, {fontSize: 50,color: myColors.result}]}>{result?.toString()}</Text>;
+      }
+  
+      if( firstNumber && firstNumber.length < 6){
+        return <Text style={Styles.screenFirstNumberDark}>{firstNumber}</Text>;
+      }
+  
+      if (firstNumber === "") {
+        return <Text style={Styles.screenFirstNumberDark}>{"0"}</Text>;
+      }
+      
+      if (firstNumber.length > 5 && firstNumber.length < 8) {
+        return (
+          <Text style={[Styles.screenFirstNumberDark, { fontSize: 70 }]}>
+            {firstNumber}
+          </Text>
+        );
+      }
+  
+      if (firstNumber. length > 7) {
+        return (
+          <Text style={[Styles.screenFirstNumberDark, { fontSize: 50 }]}>
+          {firstNumber}
+          </Text>
+        );
+      }
     }
   };
 
@@ -105,7 +145,7 @@ const myKeyboard = () => {
           marginBottom: 10
         }}
       >
-        <Text style={Styles.screenSecondNumber}>
+        <Text style={theme === "light"? Styles.screenSecondNumberLight : Styles.screenSecondNumberDark}>
           {secondNumber}
           <Text style={{
             color: 'purple',

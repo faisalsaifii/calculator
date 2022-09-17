@@ -76,13 +76,25 @@ export const Styles = StyleSheet.create({
         position: 'absolute',
         bottom: 50,
     },
-    screenFirstNumber: {
+    screenFirstNumberLight: {
+        fontSize: 96,
+        color: myColors.black,
+        fontWeight: '200',
+        alignSelf: "flex-end",
+    },
+    screenSecondNumberLight: {
+        fontSize: 40,
+        color: myColors.black,
+        fontWeight: '200',
+        alignSelf: "flex-end",
+    },
+    screenFirstNumberDark: {
         fontSize: 96,
         color: myColors.white,
         fontWeight: '200',
         alignSelf: "flex-end",
     },
-    screenSecondNumber: {
+    screenSecondNumberDark: {
         fontSize: 40,
         color: myColors.white,
         fontWeight: '200',
