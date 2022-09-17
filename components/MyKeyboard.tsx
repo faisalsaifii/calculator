@@ -62,7 +62,7 @@ const myKeyboard = () => {
     }
 
     if( firstNumber && firstNumber.length < 6){
-      return <Text style={Styles.screenFirstNumber}></Text>;
+      return <Text style={Styles.screenFirstNumber}>{firstNumber}</Text>;
     }
 
     if (firstNumber === "") {

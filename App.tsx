@@ -12,6 +12,7 @@ export default function App() {
         <Switch
           value={theme === 'dark'} // Switch on / true for whichever value is passed
           onValueChange={() => setTheme(theme === 'light'? 'dark' : 'light')}
+          style={{marginTop:20,}}
         />
         <MyKeyboard/>
       </SafeAreaView>
@@ -22,13 +23,13 @@ export default function App() {
 const styles = StyleSheet.create({
   containerlight: {
     flex: 1,
-    backgroundColor: myColors.light,
+    backgroundColor: myColors.white,
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
   containerdark: {
     flex: 1,
-    backgroundColor: myColors.dark,
+    backgroundColor: myColors.black,
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
