@@ -1,5 +1,7 @@
 # Calculator using React Native
 
+The app is currently live at https://faisalsaifii.github.io/calculator
+
 ## Instructions
 ---
 ### Create EXPO Project
